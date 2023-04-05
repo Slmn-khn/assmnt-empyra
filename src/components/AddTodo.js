@@ -2,7 +2,9 @@ import React, { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addTodo } from "../reducers/todos";
+import { addButtonText, addSomeTaskText, addTaskText } from "../lang/index.js"
 import { isEmpty } from "lodash";
+
 const AddTodo = () => {
   const [title, setTitle] = useState("");
   const [isError, setError] = useState(false);
@@ -31,7 +33,7 @@ const AddTodo = () => {
       <form onSubmit={handleSubmit}>
         <TextField
           id="outlined-error"
-          label={isError ? "Please add some task" : "Add Task"}
+          label={isError ? addSomeTaskText : addTaskText}
           error={isError}
           className="inputText"
           value={title}
@@ -39,7 +41,7 @@ const AddTodo = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
         <Button variant="contained" className="submitButton" type="submit">
-          Add
+          {addButtonText}
         </Button>
       </form>
     </>
@@ -47,18 +49,3 @@ const AddTodo = () => {
 };
 
 export default AddTodo;
-
-{
-  /* <button className="submitButton" type="submit">
-Add
-</button> */
-}
-
-{
-  /* <input
-                    type="text"
-                    value={title}
-                    className="inputText"
-                    onChange={(e) => setTitle(e.target.value)}
-                /> */
-}

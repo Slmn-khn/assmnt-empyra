@@ -17,6 +17,7 @@ import EditIcon from "../static/images/edit.png";
 import DeleteIcon from "../static/images/delete.png";
 import { editTodo, deleteTodo, toggleTodo } from "../reducers/todos";
 import { isEmpty } from "lodash";
+import { deleteConfirmationText, deleteQuestion, deleteText, cancelText } from '../lang/index'
 
 const EditTodo = ({ todo }) => {
   const [title, setTitle] = useState(todo.title);
@@ -114,22 +115,24 @@ const Todo = ({ todo }) => {
             <IconButton aria-label="edit" onClick={handleEdit}>
               <img src={EditIcon} alt="" width="16" />
             </IconButton>
-            <IconButton aria-label="delete" onClick={handleDelete}>
-              <img src={DeleteIcon} alt="" width="16" />
-            </IconButton>
+            {
+              !edit && <IconButton aria-label="delete" onClick={handleDelete}>
+                <img src={DeleteIcon} alt="" width="16" />
+              </IconButton>
+            }
             <Dialog open={isDeleting} onClose={handleCancelDelete}>
-              <DialogTitle>Delete Todo?</DialogTitle>
+              <DialogTitle>{deleteQuestion}</DialogTitle>
               <DialogContent>
                 <Typography>
-                  Are you sure you want to delete this todo?
+                  {deleteConfirmationText}
                 </Typography>
               </DialogContent>
               <DialogActions>
                 <Button onClick={handleCancelDelete} color="primary">
-                  Cancel
+                  {cancelText}
                 </Button>
                 <Button onClick={handleConfirmDelete} color="primary">
-                  Delete
+                  {deleteText}
                 </Button>
               </DialogActions>
             </Dialog>
